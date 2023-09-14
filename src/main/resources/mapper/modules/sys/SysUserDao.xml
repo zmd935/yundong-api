@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.clkj.modules.sys.dao.SysUserDao">
+    <!-- 查询用户的所有权限 -->
+    <select id="queryAllPerms" resultType="string">
+		select m.perms from sys_user_role ur
+			LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+			LEFT JOIN sys_menu m on rm.menu_id = m.menu_id
+		where ur.user_id = #{userId}
+	</select>
+
+    <!-- 查询用户的所有菜单ID -->
+    <select id="queryAllMenuId" resultType="long">
+		select distinct rm.menu_id from sys_user_role ur
+			LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+		where ur.user_id = #{userId}
+	</select>
+
+    <select id="queryByUserName" resultType="com.clkj.modules.sys.entity.SysUserEntity">
+		select * from sys_user where username = #{username}
+	</select>
+
+    <select id="queryDepartmentNameByUserId" resultType="java.lang.String" parameterType="long">
+		select sd.name from sys_user su,sys_department sd where su.department_id = sd.id and su.user_id = #{id}
+	</select>
+    <select id="queryDeptIdByparentId" resultType="java.lang.Long" parameterType="long">
+		select id from sys_department where parent_id = #{id}
+	</select>
+    <select id="queryUserByDeptId" resultType="com.clkj.modules.sys.entity.SysUserEntity">
+		select
+		       su.*,
+			   sd.name departmentName
+		from
+		     sys_user su,sys_department sd
+		where
+		      su.department_Id = sd.id
+		  and
+		      su.department_id = #{deptId}
+		  and su.status = 1
+		limit #{page},#{limit}
+	</select>
+    <select id="totalCountByDeptId" resultType="java.lang.Integer">
+		select
+			count(user_id)
+		from
+			sys_user
+		where
+			department_id = #{deptId}
+		  and status = 1
+		limit #{page},#{limit}
+	</select>
+
+</mapper>

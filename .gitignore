@@ -1,0 +1,14 @@
+#compiled
+target/
+bin/
+
+#idea files
+*.iml
+.idea
+
+#vscode
+.vscode/
+.settings/
+.classpath
+.factorypath
+.project

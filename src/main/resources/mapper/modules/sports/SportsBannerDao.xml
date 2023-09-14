@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.clkj.modules.sports.dao.SportsBannerDao">
+    <select id="getList" resultType="map">
+        select id,cover_image,video from sports_home
+        where status = 0;
+    </select>
+
+    <insert id="addList">
+        insert into sports_home (cover_image,status)
+        value (#{image},0);
+    </insert>
+</mapper>

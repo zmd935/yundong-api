@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.clkj.modules.sports.dao.SportsTypeDao">
+    <select id="getTypeById" resultType="String">
+        select name from sports_course
+        where id = #{courseId}
+    </select>
+
+    <select id="getId" resultType="long">
+        select id from sports_course
+    </select>
+
+    <select id="getName" resultType="string">
+        select name from sports_course
+        where id = #{id}
+    </select>
+
+    <select id="getList" resultType="map">
+        select * from sports_course
+    </select>
+
+    <select id="getCourseType" resultType="string">
+        select name from sports_course
+        where id = #{courseId}
+    </select>
+</mapper>

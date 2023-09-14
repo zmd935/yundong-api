@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.clkj.modules.sports.dao.SportsCourseDao">
+    <select id="getSize" resultType="string">
+        select id from sports_home
+        where status = 2;
+    </select>
+
+    <select id="getCourseId" resultType="Long">
+        select course_id from sports_home
+        where id = #{id};
+    </select>
+
+    <select id="getCourse" resultType="map">
+        select id,name,cover_image,detail,video from sports_home
+        where id = #{id}
+    </select>
+</mapper>

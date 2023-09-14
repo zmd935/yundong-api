@@ -1,0 +1,71 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  # 环境 dev|test|prod
+  profiles:
+    active: dev
+  # jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+#  resources:
+#    add-mappings: false
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.clkj.modules.*.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
+wx:
+  #公众号
+  mp:
+    appId: 111 #（一个公众号的appid）
+    secret: 111 #（公众号的appsecret）
+    token: 111 #（接口配置里的Token值）
+    aesKey: 111 #（接口配置里的EncodingAESKey值）
+  #支付
+  pay:
+    appId: 111 #微信公众号或者小程序等的appid
+    mchId: 111 #微信支付商户号
+    mchKey: 111 #微信支付商户密钥
+    keyPath: classpath:/cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
